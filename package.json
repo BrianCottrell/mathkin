@@ -1,0 +1,12 @@
+{
+  "name": "math-kin-app-server",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "@kinecosystem/kin-sdk-node": "^0.9.3",
+    "express": "^4.17.0"
+  }
+}
