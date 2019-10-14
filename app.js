@@ -47,11 +47,11 @@ app.post('/transfer-to-high-score-address', function(req, res) {
 
 	const keypair = JSON.parse(req.body._keypair);
 	// Get keypair
-	console.log("We are using the following keypair: ", keypair._publicKey);
+	console.log("We are using the following keypair: ", JSON.parse(keypair._publicKey));
 
 	// Init KinAccount
 	console.log("We can now create a KinAccount object, we will use it to interact with our account");
-	const account = client.createKinAccount({ seed: keypair._secretSeed });
+	const account = client.createKinAccount({ seed: JSON.parse(keypair._secretSeed }));
 	console.log("This is the app ID of our account:", account.appId);
 	console.log("We can use our KinAccount object to get our balance");
 	account.getBalance().then(balance => {
@@ -59,8 +59,8 @@ app.post('/transfer-to-high-score-address', function(req, res) {
 	});
 
 	account.buildCreateAccount({
-		fee: 100,
-		startingBalance: 1000,
+		fee: 10,
+		startingBalance: 100,
 		memoText: "Test create account",
 		address: newKeypair.publicAddress
 	}).then(transactionBuilder => {
@@ -94,11 +94,11 @@ app.post('/get-balance', function(req, res) {
 
 	const keypair = JSON.parse(req.body._keypair);
 	// Get keypair
-	console.log("We are using the following keypair: ", keypair._publicKey);
+	console.log("We are using the following keypair: ", JSON.parse(keypair._publicKey));
 
 	// Init KinAccount
 	console.log("We can now create a KinAccount object, we will use it to interact with our account");
-	const account = client.createKinAccount({ seed: keypair._secretSeed });
+	const account = client.createKinAccount({ seed: JSON.parse(keypair._secretSeed) });
 	console.log("This is the app ID of our account:", account.appId);
 	console.log("We can use our KinAccount object to get our balance");
 	account.getBalance().then(balance => {
