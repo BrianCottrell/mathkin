@@ -14,7 +14,7 @@ var highScoreAddress = null;
 
 //Send high score public address in request body
 app.post('/set-high-score-address', function (req, res) {
-    highScoreAddress = req.body.publicAddress;
+    highScoreAddress = req.body._keypair._publicKey;
     res.send(200);
 });
 
@@ -45,13 +45,13 @@ app.get('/create-account', function(req, res) {
 app.post('/transfer-to-high-score-address', function(req, res) {
 	console.log("environment", client.environment);
 
-	const keypair = JSON.parse(req.body.keypair);
+	const keypair = JSON.parse(req.body._keypair);
 	// Get keypair
-	console.log("We are using the following keypair: ", keypair.publicAddress);
+	console.log("We are using the following keypair: ", keypair._publicKey);
 
 	// Init KinAccount
 	console.log("We can now create a KinAccount object, we will use it to interact with our account");
-	const account = client.createKinAccount({ seed: keypair.seed });
+	const account = client.createKinAccount({ seed: keypair._secretSeed });
 	console.log("This is the app ID of our account:", account.appId);
 	console.log("We can use our KinAccount object to get our balance");
 	account.getBalance().then(balance => {
@@ -92,13 +92,13 @@ app.post('/transfer-to-high-score-address', function(req, res) {
 app.post('/get-balance', function(req, res) {
 	console.log("environment", client.environment);
 
-	const keypair = JSON.parse(req.body.keypair);
+	const keypair = JSON.parse(req.body._keypair);
 	// Get keypair
-	console.log("We are using the following keypair: ", keypair.publicAddress);
+	console.log("We are using the following keypair: ", keypair._publicKey);
 
 	// Init KinAccount
 	console.log("We can now create a KinAccount object, we will use it to interact with our account");
-	const account = client.createKinAccount({ seed: keypair.seed });
+	const account = client.createKinAccount({ seed: keypair._secretSeed });
 	console.log("This is the app ID of our account:", account.appId);
 	console.log("We can use our KinAccount object to get our balance");
 	account.getBalance().then(balance => {
