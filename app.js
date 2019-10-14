@@ -89,5 +89,22 @@ app.post('/transfer-to-high-score-address', function(req, res) {
 	res.send(200);
 });
 
+app.post('/get-balance', function(req, res) {
+	console.log("environment", client.environment);
+
+	const keypair = JSON.parse(req.body.keypair);
+	// Get keypair
+	console.log("We are using the following keypair: ", keypair.publicAddress);
+
+	// Init KinAccount
+	console.log("We can now create a KinAccount object, we will use it to interact with our account");
+	const account = client.createKinAccount({ seed: keypair.seed });
+	console.log("This is the app ID of our account:", account.appId);
+	console.log("We can use our KinAccount object to get our balance");
+	account.getBalance().then(balance => {
+		res.send(balance);
+	});
+});
+
 app.listen(port);
 console.log("Listening to port", port);
