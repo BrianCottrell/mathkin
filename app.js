@@ -51,7 +51,7 @@ app.post('/transfer-to-high-score-address', function(req, res) {
 
 	// Init KinAccount
 	console.log("We can now create a KinAccount object, we will use it to interact with our account");
-	const account = client.createKinAccount({ seed: JSON.parse(keypair._secretSeed }));
+	const account = client.createKinAccount({ seed: JSON.parse(keypair._secretSeed) });
 	console.log("This is the app ID of our account:", account.appId);
 	console.log("We can use our KinAccount object to get our balance");
 	account.getBalance().then(balance => {
